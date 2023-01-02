@@ -2,7 +2,7 @@ FROM alpine:latest
 ENV DEBIAN_FRONTEND=noninteractive \
     RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
-    PATH=/usr/local/cargo/bin:/opt/openvscode-server/bin:/usr/local/bin:$PATH \
+    PATH=/usr/local/cargo/bin:/opt/openvscode-server/bin:/usr/local/bin:/home/workspace/.cargo/bin/:/home/workspace/opt/bin:$PATH \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     EDITOR=code \
@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     GIT_EDITOR="code --wait" \
     OPENVSCODE_SERVER_ROOT=/opt/openvscode-server
 
-RUN apk --no-cache add ca-certificates tar git curl wget libc6-compat g++ cmake gcc make jq libc6-compat gcompat  nodejs-current icu-data-full npm && \
+RUN apk --no-cache add ca-certificates tar git curl wget libc6-compat g++ cmake gcc make jq libc6-compat gcompat  nodejs-current icu-data-full npm openssl-dev pkgconf && \
 update-ca-certificates && \
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile default --component rust-src && \
 rustup target add \
