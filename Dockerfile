@@ -6,11 +6,12 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     EDITOR=code \
+    USER=root \
     VISUAL=code \
     GIT_EDITOR="code --wait" \
     OPENVSCODE_SERVER_ROOT=/opt/openvscode-server
 
-RUN apk --no-cache add ca-certificates tar git curl wget libc6-compat g++ cmake gcc make jq libc6-compat gcompat  nodejs-current icu-data-full npm openssl-dev pkgconf && \
+RUN apk --no-cache add ca-certificates tar git curl wget libc6-compat g++ cmake gcc make jq libc6-compat gcompat  nodejs-current icu-data-full npm openssl-dev pkgconf perl python3 nano ncdu && \
 update-ca-certificates && \
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile default --component rust-src && \
 rustup target add \
@@ -25,7 +26,8 @@ wasm32-wasi && \
 	rm -rf *tar.gz && \
 	mv * /opt/openvscode-server
 WORKDIR /home/workspace
-ENV HOME=/home/workspace
+ENV HOME=/home/workspace \
+    USER=workspace
 
 USER 1000:1000
 #token in url = tkn
