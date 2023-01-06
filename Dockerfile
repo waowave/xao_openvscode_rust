@@ -17,6 +17,11 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profil
 rustup target add \
 arm-linux-androideabi \
 armv7-linux-androideabi \
+aarch64-linux-android \
+x86_64-apple-darwin \
+aarch64-apple-darwin \
+aarch64-linux-android \
+i686-linux-android \
 wasm32-unknown-unknown \
 wasm32-wasi && \
     mkdir /vscode_tmp && \
